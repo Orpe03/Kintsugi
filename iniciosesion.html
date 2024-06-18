@@ -82,11 +82,13 @@
         document.getElementById('formInicioSesion').addEventListener('submit', function(event) {
             event.preventDefault();
             var nombre = document.getElementById('nombre').value;
+            console.log('Nombre enviado a la aplicación Unity:', nombre);
             window.location.href = 'unityapp://iniciar_sesion?nombre=' + encodeURIComponent(nombre);
         });
     </script>
 </body>
 </html>
+
 
 
 
