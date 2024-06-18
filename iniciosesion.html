@@ -61,7 +61,7 @@
                     <div class="card">
                         <h5 class="card-header">Inicio de Sesión</h5>
                         <div class="card-body">
-                            <form id="formInicioSesion" action="#" method="post">
+                            <form id="formInicioSesion" action="redirect.html" method="post">
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre:</label>
                                     <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -82,12 +82,13 @@
         document.getElementById('formInicioSesion').addEventListener('submit', function(event) {
             event.preventDefault();
             var nombre = document.getElementById('nombre').value;
-            console.log('Nombre enviado a la aplicación Unity:', nombre);
-            window.location.href = 'unityapp://iniciar_sesion?nombre=' + encodeURIComponent(nombre);
+            console.log('Nombre enviado a la página intermedia:', nombre);
+            window.location.href = 'redirect.html?nombre=' + encodeURIComponent(nombre);
         });
     </script>
 </body>
 </html>
+
 
 
 
