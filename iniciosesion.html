@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El sitio web de Kintsugi</title>
+    <title>Datos de Usuarios</title>
     <!-- Incluir hoja de estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//code.tidio.co/io1vsiipeiwbsda4ewo3kyuba8u0r0xa.js" async></script>
-    
     <style>
-        /* Estilos personalizados */
         body {
             background-color: white;
             color: black;
@@ -52,34 +49,77 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.html#logros">Logros</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="mostrar_datos.html">Inicio de Sesión</a>
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="container mt-5">
-        <!-- Contenido de la página -->
-        <section id="inicio" class="section">
-            <div class="jumbotron text-center">
-                <h1 class="display-4">¡Bienvenido a mi Sitio Web!</h1>
-                <p class="lead">Este es un párrafo. Así es como se hace un enlace: <a href="https://neocities.org">Neocities</a>.</p>
+        <section id="datos-usuarios" class="section">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <h5 class="card-header">Datos de Usuarios</h5>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Logros</th>
+                                        <th>Parte 1</th>
+                                        <th>Parte 2</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaUsuarios">
+                                    <!-- Los datos se llenarán aquí mediante JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-
-        <section id="logros" class="section">
-            <h2>Logros</h2>
-            <p>Esta sección muestra tus logros. Puedes agregar más detalles aquí.</p>
         </section>
     </div>
 
-    <!-- Incluir scripts de Bootstrap y otros scripts necesarios -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+
+    <script>
+        // Función para obtener los datos de la base de datos
+        async function obtenerDatos() {
+            try {
+                const response = await fetch('http://localhost/obtener_datos.php'); // Asegúrate de tener un endpoint que devuelva los datos
+                const datos = await response.json();
+                llenarTabla(datos);
+            } catch (error) {
+                console.error('Error al obtener los datos:', error);
+            }
+        }
+
+        // Función para llenar la tabla con los datos obteni
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
