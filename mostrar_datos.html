@@ -3,120 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos de Usuarios</title>
-    <!-- Incluir hoja de estilos de Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Mostrar Datos</title>
     <style>
         body {
-            background-color: white;
-            color: black;
-            font-family: Verdana, sans-serif;
-            padding-top: 5rem;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
         }
-        .jumbotron {
-            background-color: #f8f9fa;
-            padding: 2rem 1rem;
-            margin-bottom: 2rem;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #dddddd;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-        .lead {
-            font-size: 1.25rem;
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
         }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+        table {
+            width: 100%;
+            border: solid 2px #7e7c7c;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-        .btn-primary:hover {
-            background-color: #0069d9;
-            border-color: #0062cc;
+        th, h2 {
+            background-color: #edf797;
+            padding: 10px;
+            text-align: center;
+            border: solid 1px #7e7c7c;
         }
-        .section {
-            padding: 4rem 0;
+        td, th {
+            border: solid 1px #7e7c7c;
+            padding: 8px;
+            text-align: center;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .form-control {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Tu Sitio Web</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#logros">Logros</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container mt-5">
-        <section id="datos-usuarios" class="section">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <h5 class="card-header">Datos de Usuarios</h5>
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Logros</th>
-                                        <th>Parte 1</th>
-                                        <th>Parte 2</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tablaUsuarios">
-                                    <!-- Los datos se llenarán aquí mediante JavaScript -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="container">
+        <h1>Datos de la Base de Datos</h1>
+        <input type="text" id="buscarInput" class="form-control" placeholder="Buscar...">
+        <div id="datosTabla"></div>
+        <div id="error" class="error-message"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
     <script>
-        // Función para obtener los datos de la base de datos
-        async function obtenerDatos() {
-            try {
-                const response = await fetch('http://localhost/obtener_datos.php');
-                const datos = await response.json();
-                llenarTabla(datos);
-            } catch (error) {
-                console.error('Error al obtener los datos:', error);
-            }
+        function obtenerDatos() {
+            fetch('http://localhost/obtener_datos.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la solicitud.');
+                    }
+                    return response.text(); // Cambiado a response.text() para manejar HTML o texto
+                })
+                .then(data => {
+                    mostrarDatosHTML(data); // Llama a una función para mostrar el HTML recibido
+                })
+                .catch(error => {
+                    console.error('Error al obtener los datos:', error);
+                    mostrarError(error.message);
+                });
         }
 
-        // Función para llenar la tabla con los datos obtenidos
-        function llenarTabla(datos) {
-            const tabla = document.getElementById('tablaUsuarios');
-            tabla.innerHTML = '';
-            datos.forEach(usuario => {
-                const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td>${usuario.nombre}</td>
-                    <td>${usuario.logros}</td>
-                    <td>${usuario.parte_1}</td>
-                    <td>${usuario.parte_2}</td>
-                `;
-                tabla.appendChild(fila);
+        function mostrarDatosHTML(html) {
+            const tablaDatos = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th><h2>Nombre</h2></th>
+                            <th><h2>Parte 1</h2></th>
+                            <th><h2>Parte 2</h2></th>
+                            <th><h2>Logros</h2></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${html} // Los datos de la tabla recibidos del servidor
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('datosTabla').innerHTML = tablaDatos;
+            
+            document.getElementById('buscarInput').addEventListener('input', function() {
+                filtrarTabla(this.value.trim().toLowerCase());
             });
         }
 
-        // Llamar a la función para obtener los datos al cargar la página
-        document.addEventListener('DOMContentLoaded', obtenerDatos);
+        function mostrarError(message) {
+            document.getElementById('error').textContent = 'Error: ' + message; // Muestra el mensaje de error
+        }
+
+        function filtrarTabla(terminoBusqueda) {
+            const filas = document.querySelectorAll('table tbody tr');
+            filas.forEach(fila => {
+                let encontrado = false;
+                fila.querySelectorAll('td').forEach(celda => {
+                    const contenido = celda.textContent.toLowerCase();
+                    if (contenido.includes(terminoBusqueda)) {
+                        encontrado = true;
+                    }
+                });
+                if (encontrado) {
+                    fila.style.display = '';
+                } else {
+                    fila.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            obtenerDatos();
+        });
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 
