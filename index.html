@@ -9,19 +9,22 @@
     <style>
         /* Estilos personalizados */
         body {
-            
-            background-color: white;
-            color: black;
-            font-family: Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: Arial, sans-serif;
             padding-top: 5rem;
         }
         .jumbotron {
-            background-color: #f8f9fa;
+            background-color: #ffffff;
             padding: 2rem 1rem;
-            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
-        .lead {
-            font-size: 1.25rem;
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section {
+            padding: 4rem 0;
         }
         .btn-primary {
             background-color: #007bff;
@@ -31,8 +34,11 @@
             background-color: #0069d9;
             border-color: #0062cc;
         }
-        .section {
-            padding: 4rem 0;
+        .lead {
+            font-size: 1.25rem;
+        }
+        .card {
+            margin-bottom: 30px;
         }
     </style>
     <script src="//code.tidio.co/io1vsiipeiwbsda4ewo3kyuba8u0r0xa.js" async></script>
@@ -49,7 +55,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Inicio</a>
                     </li>
-                    
                     <li class="nav-item">
                         <a class="nav-link" href="mostrar_datos.html">Logros</a>
                     </li>
@@ -61,18 +66,36 @@
     <div class="container mt-5">
         <!-- Contenido de la página -->
         <section id="inicio" class="section">
-            <div class="jumbotron text-center">
+            <div class="jumbotron">
                 <h1 class="display-4">¡Bienvenido a Kintsugi!</h1>
-                <!--foto aqui-->
-                
+                <img src="Kin.png" alt="Imagen Kintsugi" class="img-fluid rounded mx-auto d-block" style="max-width: 300px;">
+                <p class="lead mt-4">Kintsugi es el arte japonés de reparar cerámica con polvo de oro, resaltando las cicatrices como parte de la historia del objeto.</p>
             </div>
         </section>
 
-        <section id="logros" class="section">
-            <h2>Chat online</h2>
-            <p>Habla con asistentes en linea dandole al boton </p>
-            <h2>Logros</h2>
-            <p>Esta sección muestra tus logros. Puedes agregar más detalles aquí.</p>
+        <section id="chat" class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Chat Online</h2>
+                                <p class="card-text">Habla con nuestros asistentes en línea para recibir ayuda personalizada o resolver tus dudas sobre la app.</p>
+                                <a href="//code.tidio.co/io1vsiipeiwbsda4ewo3kyuba8u0r0xa.js" class="btn btn-primary" target="_blank">Iniciar Chat</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Logros</h2>
+                                <p class="card-text">Explora nuestros logros/puntos y descubre cuántos puntos y logros tienes.</p>
+                                <a href="mostrar_datos.html" class="btn btn-primary">Ver Logros</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 
@@ -81,6 +104,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
 
 
 
